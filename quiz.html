@@ -4,53 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Quiz</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="quiz-container">
+    <div class="quiz-container" id="start-screen">
+        <h2>Welcome to the Quiz!</h2>
+        <p>Choose a quiz to start:</p>
+        <button onclick="startQuiz('capitals')">Capitals Quiz</button>
+        <button onclick="startQuiz('languages')">Languages Quiz</button>
+    </div>
+
+    <div class="quiz-container" id="quiz-screen" style="display: none;">
         <div class="question" id="question">Loading...</div>
         <ul class="options" id="options"></ul>
-        <button onclick="checkAnswer()">Submit</button>
+        <button onclick="submitAnswer()">Submit</button>
+        <!-- Timer Element Added -->
+        <div id="timer">Time Left: 10s</div>
+    </div>
+
+    <div class="quiz-container" id="result-screen" style="display: none;">
         <div class="result" id="result"></div>
+        <div class="review" id="review"></div>
+        <!-- Go Back Button -->
+        <button onclick="goBackToStart()">Go Back to Start</button>
     </div>
 
     <script>
-        const quizData = {
-            question: "What is the capital of France?",
-            options: ["Berlin", "Madrid", "Paris", "Rome"],
-            answer: "Paris"
+        const quizzes = {
+            capitals: [
+                { question: "What is the capital of France?", options: ["Berlin", "Madrid", "Paris", "Rome"], answer: "Paris" },
+                { question: "What is the capital of Germany?", options: ["Berlin", "Vienna", "Brussels", "Amsterdam"], answer: "Berlin" },
+                { question: "What is the capital of Italy?", options: ["Madrid", "Rome", "Lisbon", "Athens"], answer: "Rome" },
+                { question: "What is the capital of Spain?", options: ["Madrid", "Barcelona", "Lisbon", "Paris"], answer: "Madrid" },
+                { question: "What is the capital of Canada?", options: ["Toronto", "Vancouver", "Ottawa", "Montreal"], answer: "Ottawa" }
+            ],
+            languages: [
+                { question: "What language is spoken in Brazil?", options: ["Spanish", "Portuguese", "French", "Italian"], answer: "Portuguese" },
+                { question: "What is the official language of Japan?", options: ["Chinese", "Korean", "Japanese", "Thai"], answer: "Japanese" },
+                { question: "What is the primary language spoken in Egypt?", options: ["Arabic", "Hebrew", "Persian", "Turkish"], answer: "Arabic" },
+                { question: "Which language is predominantly spoken in Mexico?", options: ["English", "Spanish", "Portuguese", "French"], answer: "Spanish" },
+                { question: "What language is primarily spoken in Russia?", options: ["Ukrainian", "Polish", "Russian", "Czech"], answer: "Russian" }
+            ]
         };
-
-        const questionElement = document.getElementById("question");
-        const optionsElement = document.getElementById("options");
-        const resultElement = document.getElementById("result");
-
-        questionElement.textContent = quizData.question;
-        quizData.options.forEach(option => {
-            const li = document.createElement("li");
-            const input = document.createElement("input");
-            input.type = "radio";
-            input.name = "quiz";
-            input.value = option;
-            li.appendChild(input);
-            li.appendChild(document.createTextNode(option));
-            optionsElement.appendChild(li);
-        });
-
-        function checkAnswer() {
-            const selectedOption = document.querySelector('input[name="quiz"]:checked');
-            if (selectedOption) {
-                if (selectedOption.value === quizData.answer) {
-                    resultElement.textContent = "Correct!";
-                    resultElement.style.color = "green";
-                } else {
-                    resultElement.textContent = "Wrong! The correct answer is " + quizData.answer;
-                    resultElement.style.color = "red";
-                }
-            } else {
-                resultElement.textContent = "Please select an answer.";
-                resultElement.style.color = "black";
-            }
-        }
-    </script>
-</body>
-</html>
