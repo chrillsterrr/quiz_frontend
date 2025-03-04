@@ -9,6 +9,7 @@
 <body>
     <div class="quiz-container" id="start-screen">
         <h2>Welcome to the Quiz!</h2>
+        <p>Down below you can choose which quiz you want to do, where you get mulitple choice answers with a timer.<br> At the end of the test you will see your results.</p>
         <p>Choose a quiz to start:</p>
         <button onclick="startQuiz('capitals')">Capitals Quiz</button>
         <button onclick="startQuiz('languages')">Languages Quiz</button>
@@ -46,3 +47,111 @@
                 { question: "What language is primarily spoken in Russia?", options: ["Ukrainian", "Polish", "Russian", "Czech"], answer: "Russian" }
             ]
         };
+
+        let currentQuiz = [];
+        let currentQuestionIndex = 0;
+        let correctAnswers = 0;
+        let userAnswers = [];
+        let timer;
+        let timeLeft;
+        const startScreen = document.getElementById("start-screen");
+        const quizScreen = document.getElementById("quiz-screen");
+        const resultScreen = document.getElementById("result-screen");
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const resultElement = document.getElementById("result");
+        const reviewElement = document.getElementById("review");
+
+        function startQuiz(topic) {
+            currentQuiz = quizzes[topic];
+            currentQuestionIndex = 0;
+            correctAnswers = 0;
+            userAnswers = [];
+            shuffleQuestions();  // Shuffle questions when quiz starts
+            startScreen.style.display = "none";
+            quizScreen.style.display = "block";
+            resultScreen.style.display = "none";
+            loadQuestion();
+        }
+
+        function shuffleQuestions() {
+            // Shuffle the questions array
+            currentQuiz = currentQuiz.sort(() => Math.random() - 0.5);
+            // Shuffle the options for each question
+            currentQuiz.forEach(question => {
+                question.options = question.options.sort(() => Math.random() - 0.5);
+            });
+        }
+
+        function startTimer() {
+            timeLeft = 10;
+            document.getElementById("timer").textContent = `Time Left: ${timeLeft}s`;
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById("timer").textContent = `Time Left: ${timeLeft}s`;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    submitAnswer(true); // Automatically submit if the timer runs out
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            if (currentQuestionIndex < currentQuiz.length) {
+                clearInterval(timer);
+                startTimer();
+                const currentQuestion = currentQuiz[currentQuestionIndex];
+                questionElement.textContent = currentQuestion.question;
+                optionsElement.innerHTML = "";
+                currentQuestion.options.forEach(option => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `<label><input type='radio' name='quiz' value='${option}'> ${option}</label>`;
+                    li.onclick = () => li.querySelector("input").checked = true;
+                    optionsElement.appendChild(li);
+                });
+            } else {
+                showResults();
+            }
+        }
+
+        function submitAnswer(autoSubmit = false) {
+            clearInterval(timer);
+            const selectedOption = document.querySelector('input[name="quiz"]:checked');
+            if (!selectedOption && !autoSubmit) {
+                alert("Please select an answer before submitting.");
+                return; // Prevent moving forward without selecting an answer
+            }
+            const answerValue = selectedOption ? selectedOption.value : "(No answer)";
+            userAnswers.push({
+                question: currentQuiz[currentQuestionIndex].question,
+                selected: answerValue,
+                correct: currentQuiz[currentQuestionIndex].answer
+            });
+            if (answerValue === currentQuiz[currentQuestionIndex].answer) {
+                correctAnswers++;
+            }
+            currentQuestionIndex++;
+            loadQuestion();
+        }   
+
+        function showResults() {
+            quizScreen.style.display = "none";
+            resultScreen.style.display = "block";
+            resultElement.textContent = `You got ${correctAnswers} out of ${currentQuiz.length} correct (${((correctAnswers / currentQuiz.length) * 100).toFixed(2)}%)!`;
+            reviewElement.innerHTML = "<h3>Review Your Answers:</h3>";
+            userAnswers.forEach(answer => {
+                const p = document.createElement("p");
+                p.innerHTML = `<strong>${answer.question}</strong><br>Your Answer: ${answer.selected} <br> Correct Answer: ${answer.correct}`;
+                p.style.color = answer.selected === answer.correct ? "green" : "red";
+                reviewElement.appendChild(p);
+            });
+        }
+
+        // Function to go back to the start screen
+        function goBackToStart() {
+            resultScreen.style.display = "none";
+            startScreen.style.display = "block";
+        }
+    </script>
+</body>
+</html>

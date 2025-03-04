@@ -6,6 +6,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 .quiz-container {
     max-width: 500px;
     margin: 50px auto;
@@ -65,4 +66,37 @@ button:hover {
 .review p {
     padding: 10px;
     border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .quiz-container {
+        max-width: 90%;
+        margin: 25px auto;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    .question {
+        font-size: 19px;
+    }
+
+    .options li {
+        font-size: 17px;
+    }
+
+    button {
+        padding: 14px 28px;
+        font-size: 19px;
+    }
+
+    .result {
+        font-size: 17px;
+    }
+
+    .review p {
+        font-size: 15px;
+    }
 }
