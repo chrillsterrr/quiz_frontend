@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> <!-- We made our quiz in English, but this also allows for special characters etc-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Quiz</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> <!-- linking our stylesheet -->
 </head>
 <body>
+    <!-- Our "welcoming message" -->
     <div class="quiz-container" id="start-screen">
         <h2>Welcome to the Quiz!</h2>
         <p>Down below you can choose which quiz you want to do, where you get mulitple choice answers with a timer.<br> At the end of the test you will see your results.</p>
@@ -30,7 +31,8 @@
         <button onclick="goBackToStart()">Go Back to Start</button>
     </div>
 
-    <script>
+    <script> 
+        // Our questions and the options to choose from and the right answer.
         const quizzes = {
             capitals: [
                 { question: "What is the capital of France?", options: ["Berlin", "Madrid", "Paris", "Rome"], answer: "Paris" },
@@ -39,6 +41,7 @@
                 { question: "What is the capital of Spain?", options: ["Madrid", "Barcelona", "Lisbon", "Paris"], answer: "Madrid" },
                 { question: "What is the capital of Canada?", options: ["Toronto", "Vancouver", "Ottawa", "Montreal"], answer: "Ottawa" }
             ],
+            // Our questions and the options to choose from and the right answer.
             languages: [
                 { question: "What language is spoken in Brazil?", options: ["Spanish", "Portuguese", "French", "Italian"], answer: "Portuguese" },
                 { question: "What is the official language of Japan?", options: ["Chinese", "Korean", "Japanese", "Thai"], answer: "Japanese" },
@@ -48,10 +51,11 @@
             ]
         };
 
-        let currentQuiz = [];
+        // our variables    
+        let currentQuiz = []; //array
         let currentQuestionIndex = 0;
         let correctAnswers = 0;
-        let userAnswers = [];
+        let userAnswers = []; //array
         let timer;
         let timeLeft;
         const startScreen = document.getElementById("start-screen");
@@ -62,6 +66,7 @@
         const resultElement = document.getElementById("result");
         const reviewElement = document.getElementById("review");
 
+        // function to start the quiz, when pressing a "topic"
         function startQuiz(topic) {
             currentQuiz = quizzes[topic];
             currentQuestionIndex = 0;
@@ -74,6 +79,7 @@
             loadQuestion();
         }
 
+        // Our function to shuffle the questions
         function shuffleQuestions() {
             // Shuffle the questions array
             currentQuiz = currentQuiz.sort(() => Math.random() - 0.5);
@@ -83,6 +89,7 @@
             });
         }
 
+        // function for out timer, we've set it to 10
         function startTimer() {
             timeLeft = 10;
             document.getElementById("timer").textContent = `Time Left: ${timeLeft}s`;
@@ -96,6 +103,7 @@
             }, 1000);
         }
 
+        // When you choose an answer or start the quiz, we load a question
         function loadQuestion() {
             if (currentQuestionIndex < currentQuiz.length) {
                 clearInterval(timer);
@@ -114,12 +122,13 @@
             }
         }
 
+        // our submit answer function
         function submitAnswer(autoSubmit = false) {
             clearInterval(timer);
             const selectedOption = document.querySelector('input[name="quiz"]:checked');
             if (!selectedOption && !autoSubmit) {
                 alert("Please select an answer before submitting.");
-                return; // Prevent moving forward without selecting an answer
+                return; // forces an answer before moving forward without selecting an answer
             }
             const answerValue = selectedOption ? selectedOption.value : "(No answer)";
             userAnswers.push({
@@ -134,6 +143,7 @@
             loadQuestion();
         }   
 
+        // function to show results at the end
         function showResults() {
             quizScreen.style.display = "none";
             resultScreen.style.display = "block";
@@ -142,7 +152,7 @@
             userAnswers.forEach(answer => {
                 const p = document.createElement("p");
                 p.innerHTML = `<strong>${answer.question}</strong><br>Your Answer: ${answer.selected} <br> Correct Answer: ${answer.correct}`;
-                p.style.color = answer.selected === answer.correct ? "green" : "red";
+                p.style.color = answer.selected === answer.correct ? "green" : "red"; // we made some styles here for when getting a right or wrong answer.
                 reviewElement.appendChild(p);
             });
         }
