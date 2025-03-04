@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Quiz</title>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="question" id="question">Loading...</div>
+        <ul class="options" id="options"></ul>
+        <button onclick="checkAnswer()">Submit</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        const quizData = {
+            question: "What is the capital of France?",
+            options: ["Berlin", "Madrid", "Paris", "Rome"],
+            answer: "Paris"
+        };
+
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const resultElement = document.getElementById("result");
+
+        questionElement.textContent = quizData.question;
+        quizData.options.forEach(option => {
+            const li = document.createElement("li");
+            const input = document.createElement("input");
+            input.type = "radio";
+            input.name = "quiz";
+            input.value = option;
+            li.appendChild(input);
+            li.appendChild(document.createTextNode(option));
+            optionsElement.appendChild(li);
+        });
+
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="quiz"]:checked');
+            if (selectedOption) {
+                if (selectedOption.value === quizData.answer) {
+                    resultElement.textContent = "Correct!";
+                    resultElement.style.color = "green";
+                } else {
+                    resultElement.textContent = "Wrong! The correct answer is " + quizData.answer;
+                    resultElement.style.color = "red";
+                }
+            } else {
+                resultElement.textContent = "Please select an answer.";
+                resultElement.style.color = "black";
+            }
+        }
+    </script>
+</body>
+</html>
