@@ -17,8 +17,14 @@
             <br> The question is... will you <span class="pass-animated">pass</span> or <span class="fail-animated">fail</span>
         </p>
         <p>Choose a quiz to find out 🤔</p>
+
+        <div class="easy-quiz">
+        <p>Easy quiz 😐</p>
         <button onclick="startQuiz('capitals')">Capitals Quiz</button>
         <button onclick="startQuiz('languages')">Languages Quiz</button>
+        </div>
+        <p>Hard quiz 😈</p>
+        <button onclick="startQuiz('hardQuiz')">General knowledge</button>
     </div>
 
     <div class="quiz-container" id="quiz-screen" style="display: none;">
@@ -56,8 +62,22 @@
                 { question: "What is the primary language spoken in Egypt?", options: ["Arabic", "Hebrew", "Persian", "Turkish"], answer: "Arabic" },
                 { question: "Which language is predominantly spoken in Mexico?", options: ["English", "Spanish", "Portuguese", "French"], answer: "Spanish" },
                 { question: "What language is primarily spoken in Russia?", options: ["Ukrainian", "Polish", "Russian", "Czech"], answer: "Russian" }
+            ],
+
+            hardQuiz: [
+                { question: "What is the longest river in the world?", options: ["Nile", "Amazon", "Yangtze", "Mississippi"], answer: "Amazon" },
+                { question: "Who was the first woman to win a Nobel Prize?", options: ["Marie Curie", "Rosalind Franklin", "Ada Lovelace", "Barbara McClintock"], answer: "Marie Curie" },
+                { question: "Which element has the atomic number 92?", options: ["Uranium", "Plutonium", "Thorium", "Radium"], answer: "Uranium" },
+                { question: "What is the only country that does not have a rectangular flag?", options: ["Switzerland", "Nepal", "Vatican City", "Bhutan"], answer: "Nepal" },
+                { question: "Who developed the theory of general relativity?", options: ["Albert Einstein", "Isaac Newton", "Nikola Tesla", "Max Planck"], answer: "Albert Einstein" },
+                { question: "What is the capital of Mongolia?", options: ["Ulaanbaatar", "Astana", "Tashkent", "Bishkek"], answer: "Ulaanbaatar" },
+                { question: "Which of the following is the rarest blood type?", options: ["Rh-null", "O-negative", "AB-negative", "A-positive"], answer: "Rh-null" },
+                { question: "What year did the Titanic sink?", options: ["1912", "1905", "1898", "1920"], answer: "1912" },
+                { question: "Who painted the famous 'The Persistence of Memory'?", options: ["Salvador Dalí", "Pablo Picasso", "Vincent van Gogh", "Claude Monet"], answer: "Salvador Dalí" },
+                { question: "Which of the following is the largest moon of Saturn?", options: ["Titan", "Ganymede", "Callisto", "Io"], answer: "Titan" }
             ]
         };
+        
 
         // our variables    
         let currentQuiz = []; //array
