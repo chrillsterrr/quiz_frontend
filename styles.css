@@ -122,6 +122,26 @@ button:hover {
     margin-top: auto; /* Pushes it to the bottom */
 }
 
+#progress-container {
+    width: 100%;
+    background-color: #f3f3f3;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+#progress-bar {
+    height: 100%;
+    width: 100%;
+    background-color: #4CAF50;
+    transition: width 1s linear;
+}
+
+#time-left-text {
+    font-size: 1.2em;
+}
+
 /* Media query for more user-friendly experience on phones. */
 @media (max-width: 768px) {
     .quiz-container {

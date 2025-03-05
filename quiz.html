@@ -11,18 +11,15 @@
     <div class="quiz-container" id="start-screen">
         <h2>Welcome to the Quiz!</h2>
         <p>Down below you can choose which quiz you want to do.
-            <br> You get mulitple choice answers with a timer.⏰
+            <br> You get mulitple choice answers with a timer.<span id="timer-emoji">🕔</span>
             <br> At the end of the test you will see your results.
             <br>
             <br> The question is... will you <span class="pass-animated">pass</span> or <span class="fail-animated">fail</span>
         </p>
         <p>Choose a quiz to find out 🤔</p>
-
-        <div class="easy-quiz">
         <p>Easy quiz 😐</p>
         <button onclick="startQuiz('capitals')">Capitals Quiz</button>
         <button onclick="startQuiz('languages')">Languages Quiz</button>
-        </div>
         <p>Hard quiz 😈</p>
         <button onclick="startQuiz('hardQuiz')">General knowledge</button>
     </div>
@@ -30,7 +27,7 @@
     <div class="quiz-container" id="quiz-screen" style="display: none;">
         <div class="question" id="question">Loading...</div>
         <ul class="options" id="options"></ul>
-        <button onclick="submitAnswer()">Submit</button>
+        <button onclick="submitAnswer()">Next question</button>
         <!-- Timer Element Added -->
         <br>
         <div id="timer">Time Left: 10s</div>
@@ -63,7 +60,7 @@
                 { question: "Which language is predominantly spoken in Mexico?", options: ["English", "Spanish", "Portuguese", "French"], answer: "Spanish" },
                 { question: "What language is primarily spoken in Russia?", options: ["Ukrainian", "Polish", "Russian", "Czech"], answer: "Russian" }
             ],
-
+            // Our hard quiz
             hardQuiz: [
                 { question: "What is the longest river in the world?", options: ["Nile", "Amazon", "Yangtze", "Mississippi"], answer: "Amazon" },
                 { question: "Who was the first woman to win a Nobel Prize?", options: ["Marie Curie", "Rosalind Franklin", "Ada Lovelace", "Barbara McClintock"], answer: "Marie Curie" },
@@ -73,7 +70,6 @@
                 { question: "What is the capital of Mongolia?", options: ["Ulaanbaatar", "Astana", "Tashkent", "Bishkek"], answer: "Ulaanbaatar" },
                 { question: "Which of the following is the rarest blood type?", options: ["Rh-null", "O-negative", "AB-negative", "A-positive"], answer: "Rh-null" },
                 { question: "What year did the Titanic sink?", options: ["1912", "1905", "1898", "1920"], answer: "1912" },
-                { question: "Who painted the famous 'The Persistence of Memory'?", options: ["Salvador Dalí", "Pablo Picasso", "Vincent van Gogh", "Claude Monet"], answer: "Salvador Dalí" },
                 { question: "Which of the following is the largest moon of Saturn?", options: ["Titan", "Ganymede", "Callisto", "Io"], answer: "Titan" }
             ]
         };
@@ -85,7 +81,7 @@
         let correctAnswers = 0;
         let userAnswers = []; //array
         let timer;
-        let timeLeft;
+        let timeLeft; 
         const startScreen = document.getElementById("start-screen");
         const quizScreen = document.getElementById("quiz-screen");
         const resultScreen = document.getElementById("result-screen");
