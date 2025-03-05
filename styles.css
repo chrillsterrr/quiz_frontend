@@ -17,8 +17,45 @@ body {
 }
 
 h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 2.5em;
+    font-weight: bold;
+    text-align: center;
+    background: linear-gradient(45deg, #ff00ff, #00ffff, #ff0000, #ffff00);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glowing-text 3s infinite alternate;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes glowing-text {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.pass-animated {
+    color: green;
+    font-weight: bold;
+    text-shadow: 0px 0px 8px rgba(0, 255, 0, 0.8);
+    animation: glow-pass 1.5s infinite alternate;
+}
+
+.fail-animated {
+    color: red;
+    font-weight: bold;
+    text-shadow: 0px 0px 8px rgba(255, 0, 0, 0.8);
+    animation: glow-fail 1.5s infinite alternate;
+}
+
+@keyframes glow-pass {
+    from { text-shadow: 0px 0px 5px rgba(0, 255, 0, 0.5); }
+    to { text-shadow: 0px 0px 15px rgba(0, 255, 0, 1); }
+}
+
+@keyframes glow-fail {
+    from { text-shadow: 0px 0px 5px rgba(255, 0, 0, 0.5); }
+    to { text-shadow: 0px 0px 15px rgba(255, 0, 0, 1); }
 }
 
 .question {
