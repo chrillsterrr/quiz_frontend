@@ -21,7 +21,10 @@
         <ul class="options" id="options"></ul>
         <button onclick="submitAnswer()">Submit</button>
         <!-- Timer Element Added -->
+        <br>
         <div id="timer">Time Left: 10s</div>
+        <br>
+        <button id="cancel-quiz" onclick="cancelQuiz()">Cancel Quiz</button>
     </div>
 
     <div class="quiz-container" id="result-screen" style="display: none;">
@@ -155,6 +158,13 @@
                 p.style.color = answer.selected === answer.correct ? "green" : "red"; // we made some styles here for when getting a right or wrong answer.
                 reviewElement.appendChild(p);
             });
+        }
+
+        // Function to cancel the quiz
+        function cancelQuiz() {
+            clearInterval(timer);
+            quizScreen.style.display = "none";
+            startScreen.style.display = "block";
         }
 
         // Function to go back to the start screen

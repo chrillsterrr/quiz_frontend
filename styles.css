@@ -75,6 +75,16 @@ button:hover {
     border-radius: 5px;
 }
 
+#cancel-quiz {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: auto; /* Pushes it to the bottom */
+}
+
 /* Media query for more user-friendly experience on phones. */
 @media (max-width: 768px) {
     .quiz-container {
