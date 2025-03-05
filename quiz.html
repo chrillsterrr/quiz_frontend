@@ -17,10 +17,11 @@
             <br> The question is... will you <span class="pass-animated">pass</span> or <span class="fail-animated">fail</span>
         </p>
         <p>Choose a quiz to find out 🤔</p>
-        <p>Easy quiz 😐</p>
+        <br>
+        <p>⭐ ⭐ ☆ ☆ ☆ | Easy quiz | 😐</p>
         <button onclick="startQuiz('capitals')">Capitals Quiz</button>
         <button onclick="startQuiz('languages')">Languages Quiz</button>
-        <p>Hard quiz 😈</p>
+        <p>⭐ ⭐ ⭐ ⭐ ⭐ | Hard quiz | 😈</p>
         <button onclick="startQuiz('hardQuiz')">General knowledge</button>
     </div>
 
@@ -172,6 +173,7 @@
             quizScreen.style.display = "none";
             resultScreen.style.display = "block";
             resultElement.textContent = `You got ${correctAnswers} out of ${currentQuiz.length} correct (${((correctAnswers / currentQuiz.length) * 100).toFixed(2)}%)!`;
+            
             reviewElement.innerHTML = "<h3>Review Your Answers:</h3>";
             userAnswers.forEach(answer => {
                 const p = document.createElement("p");
