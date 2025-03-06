@@ -101,7 +101,6 @@ function loadQuestion() {
 
 // Function to submit an answer
 function submitAnswer(autoSubmit = false) {
-    clearInterval(timer);
     const selectedOption = document.querySelector('input[name="quiz"]:checked');
     if (!selectedOption && !autoSubmit) {
         alert("Please select an answer before submitting.");

@@ -142,6 +142,28 @@ button:hover {
     font-size: 1.2em;
 }
 
+/* Footer Styling */
+footer {
+    background-color: #2a5298;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    margin-top: auto;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer p {
+    margin: 10px 0;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
 /* Media query for more user-friendly experience on phones. */
 @media (max-width: 768px) {
     .quiz-container {
