@@ -29,12 +29,13 @@ const quizzes = {
 };
 
 // Our variables
-let currentQuiz = [];
-let currentQuestionIndex = 0;
+let currentQuiz = []; // stores the selected quiz, e.g. capitals, langueges etc.
+let currentQuestionIndex = 0; // tracks which quiz question is showing
 let correctAnswers = 0;
 let userAnswers = [];
 let timer;
 let timeLeft;
+// references to our HTML by ID, allowing for dynamic updates to UI
 const startScreen = document.getElementById("start-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const resultScreen = document.getElementById("result-screen");
@@ -44,6 +45,7 @@ const resultElement = document.getElementById("result");
 const reviewElement = document.getElementById("review");
 
 // Function to start the quiz when pressing a "topic"
+// also resets all "variables" so no longer stored from other quiz etc. 
 function startQuiz(topic) {
     currentQuiz = quizzes[topic];
     currentQuestionIndex = 0;
@@ -75,7 +77,7 @@ function startTimer() {
         document.getElementById("timer").textContent = `Time Left: ${timeLeft}s`;
         if (timeLeft <= 0) {
             clearInterval(timer);
-            submitAnswer(true); // Automatically submit if the timer runs out
+            submitAnswer(true); // Automatically submits an answer if the timer runs out
         }
     }, 1000);
 }
@@ -94,7 +96,7 @@ function loadQuestion() {
             li.onclick = () => li.querySelector("input").checked = true;
             optionsElement.appendChild(li);
         });
-    } else {
+    } else { //else if no more questions show results
         showResults();
     }
 }
@@ -106,17 +108,17 @@ function submitAnswer(autoSubmit = false) {
         alert("Please select an answer before submitting.");
         return; // Forces an answer before moving forward
     }
-    const answerValue = selectedOption ? selectedOption.value : "(No answer)";
+    const answerValue = selectedOption ? selectedOption.value : "(No answer)"; // store users answer, if no answer, its given null.
     userAnswers.push({
         question: currentQuiz[currentQuestionIndex].question,
         selected: answerValue,
         correct: currentQuiz[currentQuestionIndex].answer
     });
     if (answerValue === currentQuiz[currentQuestionIndex].answer) {
-        correctAnswers++;
+        correctAnswers++;  // if answer and question match, correctAnswers is increades by 1
     }
-    currentQuestionIndex++;
-    loadQuestion(); // Check the answer and then call the loadQuestion function
+    currentQuestionIndex++; // goes to next question.
+    loadQuestion(); //call the loadQuestion function
 }
 
 // Function to show the results at the end
